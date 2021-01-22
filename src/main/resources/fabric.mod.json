@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "our_villager_discounts",
+  "version": "${version}",
+  "name": "Test Fabric",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/our_villager_discounts/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [],
+    "main": [
+      "ourvillagerdiscounts.ourvillagerdiscounts.OurVillagerDiscounts"
+    ],
+    "server": []
+  },
+  "mixins": [
+    "our_villager_discounts.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.8",
+    "fabric": "*",
+    "minecraft": "1.16.4"
+  }
+}

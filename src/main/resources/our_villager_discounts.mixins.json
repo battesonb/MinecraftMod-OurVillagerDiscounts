@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "testfabric.testfabric.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ourvillagerdiscounts.ourvillagerdiscounts.mixin.VillagerInteractMixin"
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
