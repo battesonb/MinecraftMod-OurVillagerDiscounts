@@ -14,6 +14,11 @@ import net.minecraft.village.VillagerProfession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ourvillagerdiscounts.ourvillagerdiscounts.event.VillagerInteractCallback;
+import ourvillagerdiscounts.ourvillagerdiscounts.mixin.VillagerGossipEntriesInvoker;
+
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class VillagerTradeUpdateListener implements VillagerInteractCallback {
 
@@ -26,39 +31,24 @@ public class VillagerTradeUpdateListener implements VillagerInteractCallback {
 
         if (!profession.equals(VillagerProfession.NONE) && !profession.equals(VillagerProfession.NITWIT)) {
             final VillagerGossips gossip = villager.getGossip();
+            final Stream<VillagerGossips.GossipEntry> gossipAccessor = ((VillagerGossipEntriesInvoker)gossip).invokeEntries();
+            gossipAccessor
+                    .filter(a -> a.type.equals(VillageGossipType.MAJOR_POSITIVE))
+                    .max(Comparator.comparingInt(a -> a.value))
+                    .ifPresent(maxEntry -> {
+                        final int majorPositiveGossip = maxEntry.value;
+                        final int currentMajorPositiveGossip = gossip.getReputationFor(player.getUuid(), g -> g.equals(VillageGossipType.MAJOR_POSITIVE));
 
-            try {
-                final Tag gossipNbt = gossip.serialize(NbtOps.INSTANCE).getValue();
-
-                // the rest of this code is gross, but likely cheaper than serialization, anyway.
-                final String gossipNbtString = gossipNbt.toString();
-                int index = gossipNbtString.indexOf("major_positive") + 15;
-                final StringBuilder sb = new StringBuilder();
-                while (index < gossipNbtString.length()) {
-                    final char curr = gossipNbtString.charAt(++index);
-                    if (curr >= 48 && curr <= 57) {
-                        sb.append(curr);
-                    }
-                    if (curr == '}') {
-                        break;
-                    }
-                }
-
-                final int majorPositiveGossip = Integer.parseInt(sb.toString());
-                final int currentMajorPositiveGossip = gossip.getReputationFor(player.getUuid(), g -> g.equals(VillageGossipType.MAJOR_POSITIVE));
-
-                if (majorPositiveGossip > currentMajorPositiveGossip) {
-                    final ListTag list = new ListTag();
-                    final CompoundTag tag = new CompoundTag();
-                    tag.putString("Type", "major_positive");
-                    tag.putInt("Value", majorPositiveGossip);
-                    tag.putUuid("Target", player.getUuid());
-                    list.add(tag);
-                    villager.setGossipDataFromTag(list);
-                }
-            } catch (Exception e) {
-                log.warn(e);
-            }
+                        if (majorPositiveGossip > currentMajorPositiveGossip) {
+                            final ListTag list = new ListTag();
+                            final CompoundTag tag = new CompoundTag();
+                            tag.putString("Type", "major_positive");
+                            tag.putInt("Value", majorPositiveGossip);
+                            tag.putUuid("Target", player.getUuid());
+                            list.add(tag);
+                            villager.setGossipDataFromTag(list);
+                        }
+                    });
         }
 
         return ActionResult.PASS;

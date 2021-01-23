@@ -1,0 +1,3 @@
+accessWidener	v1	named
+accessible   method   net/minecraft/village/VillagerGossips   entries   Ljava/util/stream/Stream<Lnet/minecraft/village/VillagerGossips$GossipEntry>;
+accessible   class    net/minecraft/village/VillagerGossips$GossipEntry

@@ -9,6 +9,7 @@
   "license": "MIT",
   "icon": "assets/our_villager_discounts/icon.png",
   "environment": "*",
+  "accessWidener": "ourvillagerdiscounts.accesswidener",
   "entrypoints": {
     "client": [],
     "main": [
