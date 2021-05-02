@@ -3,7 +3,7 @@
 
 Version: 1.0.0
 
-![Our villager discounts icon](src/main/resources/assets/our_villager_discounts/icon.png)
+![Our villager discounts icon](ourvillagerdiscounts-fabric/src/main/resources/assets/our_villager_discounts/icon.png)
 
 ### Supported versions
 ```
