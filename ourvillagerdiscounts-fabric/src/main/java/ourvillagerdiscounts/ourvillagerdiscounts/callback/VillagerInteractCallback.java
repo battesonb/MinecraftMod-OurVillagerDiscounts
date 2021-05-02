@@ -1,4 +1,4 @@
-package ourvillagerdiscounts.ourvillagerdiscounts.event;
+package ourvillagerdiscounts.ourvillagerdiscounts.callback;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

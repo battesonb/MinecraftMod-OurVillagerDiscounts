@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import ourvillagerdiscounts.ourvillagerdiscounts.event.VillagerInteractCallback;
+import ourvillagerdiscounts.ourvillagerdiscounts.callback.VillagerInteractCallback;
 
 @Mixin(VillagerEntity.class)
 public class VillagerInteractMixin {

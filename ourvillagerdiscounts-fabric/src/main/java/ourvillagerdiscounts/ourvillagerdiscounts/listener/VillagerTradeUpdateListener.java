@@ -4,8 +4,6 @@ import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.util.ActionResult;
 import net.minecraft.village.VillageGossipType;
 import net.minecraft.village.VillagerData;
@@ -13,11 +11,10 @@ import net.minecraft.village.VillagerGossips;
 import net.minecraft.village.VillagerProfession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ourvillagerdiscounts.ourvillagerdiscounts.event.VillagerInteractCallback;
+import ourvillagerdiscounts.ourvillagerdiscounts.callback.VillagerInteractCallback;
 import ourvillagerdiscounts.ourvillagerdiscounts.mixin.VillagerGossipEntriesInvoker;
 
 import java.util.Comparator;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class VillagerTradeUpdateListener implements VillagerInteractCallback {
