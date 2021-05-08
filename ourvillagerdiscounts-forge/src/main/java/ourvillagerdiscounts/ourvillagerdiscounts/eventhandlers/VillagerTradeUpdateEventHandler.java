@@ -33,12 +33,12 @@ public class VillagerTradeUpdateEventHandler {
                     .filter(a -> a.type.equals(GossipType.MAJOR_POSITIVE))
                     .max(Comparator.comparingInt(a -> a.value))
                     .ifPresent(maxEntry -> {
-                        final int majorPositiveGossip = maxEntry.weightedValue();
-                        final int currentMajorPositiveGossip = gossip.getReputation(player.getUniqueID(), g -> g.equals(GossipType.MAJOR_POSITIVE));
+                        final int majorPositiveGossipWeighted = maxEntry.weightedValue();
+                        final int currentMajorPositiveGossipWeighted = gossip.getReputation(player.getUniqueID(), g -> g.equals(GossipType.MAJOR_POSITIVE));
 
-                        if (majorPositiveGossip > currentMajorPositiveGossip) {
+                        if (majorPositiveGossipWeighted > currentMajorPositiveGossipWeighted) {
                             final ListNBT list = new ListNBT();
-                            GossipManager.GossipEntry entry = new GossipManager.GossipEntry(player.getUniqueID(), GossipType.MAJOR_POSITIVE, majorPositiveGossip);
+                            GossipManager.GossipEntry entry = new GossipManager.GossipEntry(player.getUniqueID(), GossipType.MAJOR_POSITIVE, maxEntry.value);
                             list.add(entry.write(NBTDynamicOps.INSTANCE).getValue());
                             villager.setGossips(list);
                         }
